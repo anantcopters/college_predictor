@@ -1,0 +1,5 @@
+/storage/logs/*
+/cookies/*
+/includes/config.local.php
+*.log
+.env
