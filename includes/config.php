@@ -16,6 +16,11 @@ define('BASE_PATH', dirname(__DIR__));
 
 define('UPLOAD_DIR', __DIR__ . '/../storage/uploads/');
 define('LOG_DIR', __DIR__ . '/../storage/logs/');
+
+// Detect base URL automatically
+$scriptName = dirname($_SERVER['SCRIPT_NAME']);
+
+define('BASE_URL', rtrim(str_replace('\\', '/', $scriptName), '/'));
 /*
 |--------------------------------------------------------------------------
 | Default Configuration

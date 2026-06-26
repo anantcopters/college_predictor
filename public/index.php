@@ -266,5 +266,5 @@ require_once __DIR__ . '/../includes/header.php';
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-<script src="assets/js/result-table.js"></script>
+<script src="<?= BASE_URL ?>/assets/js/result-table.js"></script>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
