@@ -1,0 +1,10 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Deny access to hidden files
+RewriteRule "(^|/)\." - [F]
+
+# Custom error pages (optional)
+ErrorDocument 403 /college/index.php
+ErrorDocument 404 /college/index.php
