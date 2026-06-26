@@ -23,7 +23,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($year <= 0) {
         $error = 'Please enter valid year.';
     } elseif (!isset($_FILES['excel_file']) || $_FILES['excel_file']['error'] !== UPLOAD_ERR_OK) {
-        $error = 'Please upload a valid Excel file.';
+        $errorCode = $_FILES['excel_file']['error'] ?? null;
+
+        $uploadErrors = [
+            UPLOAD_ERR_INI_SIZE   => 'Uploaded file exceeds server upload_max_filesize.',
+            UPLOAD_ERR_FORM_SIZE  => 'Uploaded file exceeds form MAX_FILE_SIZE.',
+            UPLOAD_ERR_PARTIAL    => 'File was only partially uploaded.',
+            UPLOAD_ERR_NO_FILE    => 'No file was uploaded.',
+            UPLOAD_ERR_NO_TMP_DIR => 'Missing temporary folder on server.',
+            UPLOAD_ERR_CANT_WRITE => 'Failed to write uploaded file to disk.',
+            UPLOAD_ERR_EXTENSION  => 'A PHP extension stopped the upload.',
+        ];
+
+        $error = $uploadErrors[$errorCode] ?? 'Please upload a valid Excel file.';
     } else {
 
         $file = $_FILES['excel_file'];
@@ -50,7 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $result = $importer->import($destination, $year);
 
                     $message = "Import completed successfully. Total: {$result['total']}, Saved: {$result['saved']}, Skipped: {$result['skipped']}";
-
                 } catch (Exception $e) {
                     $error = 'Import failed: ' . $e->getMessage();
                 }
