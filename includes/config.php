@@ -11,7 +11,7 @@ define('DB_PASS', 'admin');
 */
 
 declare(strict_types=1);
-define('APP_NAME', 'Previous Year College Predictor');
+define('APP_NAME', 'Previous Year College Predictor ');
 define('BASE_PATH', dirname(__DIR__));
 
 define('UPLOAD_DIR', __DIR__ . '/../storage/uploads/');
