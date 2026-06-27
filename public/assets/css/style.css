@@ -686,3 +686,50 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================================================
+   IAT Result Table Only
+========================================================= */
+
+.iat-table-card {
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(30,55,90,0.08);
+}
+
+.iat-result-wrapper {
+    max-height: 65vh;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.iat-result-table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.iat-result-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #24385f;
+    color: #fff;
+    padding: 13px;
+    text-align: left;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.iat-result-table td {
+    padding: 12px 13px;
+    border-bottom: 1px solid #edf0f5;
+    font-size: 13px;
+}
+
+.iat-result-table tbody tr:hover {
+    background: #f8fbff;
+}

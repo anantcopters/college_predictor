@@ -105,32 +105,34 @@ require_once __DIR__ . '/../includes/header.php';
         <?php else: ?>
 
             <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Institute</th>
-                            <th>Category</th>
-                            <th>Latest Round</th>
-                            <th>Closing Rank</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($results as $row): ?>
+                <div class="iat-result-wrapper">
+                    <table class="iat-result-table">
+                        <thead>
                             <tr>
-                                <td><?= htmlspecialchars($row['institute_name']) ?></td>
-                                <td><?= htmlspecialchars($row['category_name']) ?></td>
-                                <td><?= htmlspecialchars($row['round_name']) ?></td>
-                                <td><?= htmlspecialchars($row['closing_rank'] ?? '-') ?></td>
-                                <td>
-                                    <span class="status-badge <?= $row['status'] === 'Possible' ? 'possible' : 'not-eligible' ?>">
-                                        <?= htmlspecialchars($row['status']) ?>
-                                    </span>
-                                </td>
+                                <th>Institute</th>
+                                <th>Category</th>
+                                <th>Latest Round</th>
+                                <th>Closing Rank</th>
+                                <th>Status</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($results as $row): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($row['institute_name']) ?></td>
+                                    <td><?= htmlspecialchars($row['category_name']) ?></td>
+                                    <td><?= htmlspecialchars($row['round_name']) ?></td>
+                                    <td><?= htmlspecialchars($row['closing_rank'] ?? '-') ?></td>
+                                    <td>
+                                        <span class="status-badge <?= $row['status'] === 'Possible' ? 'possible' : 'not-eligible' ?>">
+                                            <?= htmlspecialchars($row['status']) ?>
+                                        </span>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         <?php endif; ?>
