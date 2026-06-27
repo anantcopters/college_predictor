@@ -19,6 +19,8 @@ require_once __DIR__ . '/config.php';
     <h1><?php echo APP_NAME; ?></h1>
 
     <nav>
-        <a href="index.php">Search</a> |
-        <a href="upload.php">Upload Excel</a>
+        <a href="<?= BASE_URL ?>/index.php">JoSAA Counselling</a> |
+        <a href="<?= BASE_URL ?>/iat.php">IAT Counselling</a> |
+        <a href="<?= BASE_URL ?>/upload.php">Upload JoSAA Excel</a> |
+        <a href="<?= BASE_URL ?>/iat_admin.php">IAT Admin</a>
     </nav>

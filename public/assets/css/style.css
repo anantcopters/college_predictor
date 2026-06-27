@@ -566,3 +566,123 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================================================
+   IAT Counselling
+========================================================= */
+
+.iat-search-form {
+    grid-template-columns: 1fr 1fr 1fr 220px;
+}
+
+.iat-admin-filter {
+    grid-template-columns: 180px 180px 180px;
+}
+
+.full-button {
+    grid-column: auto;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-badge.possible {
+    background: #e8f8ed;
+    color: #236b35;
+    border: 1px solid #9bd3aa;
+}
+
+.status-badge.not-eligible {
+    background: #fff0f0;
+    color: #9b2d2d;
+    border: 1px solid #e0a1a1;
+}
+
+.iat-matrix-wrapper {
+    max-height: 70vh;
+    overflow: auto;
+}
+
+.iat-matrix-table {
+    min-width: 1000px;
+}
+
+.iat-matrix-table th,
+.iat-matrix-table td {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.iat-matrix-table th:first-child,
+.iat-matrix-table td:first-child {
+    text-align: left;
+    position: sticky;
+    left: 0;
+    z-index: 10;
+}
+
+.iat-matrix-table th:first-child {
+    background: #24385f;
+    color: #fff;
+    z-index: 30;
+}
+
+.iat-matrix-table td:first-child {
+    background: #fff;
+    color: #24385f;
+}
+
+.iat-matrix-table input {
+    width: 80px;
+    height: 34px;
+    border: 1px solid #cbd4e1;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.iat-code-help {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px 16px;
+    margin-top: 18px;
+    font-size: 13px;
+    color: #444;
+}
+
+.save-matrix-btn {
+    background: #24385f;
+    color: #fff;
+    border-color: #24385f;
+}
+
+.save-matrix-btn:hover {
+    background: #1d2d4d;
+}
+
+@media (max-width: 900px) {
+    .iat-search-form,
+    .iat-admin-filter {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .iat-code-help {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .iat-search-form,
+    .iat-admin-filter {
+        grid-template-columns: 1fr;
+    }
+
+    .iat-code-help {
+        grid-template-columns: 1fr;
+    }
+}
