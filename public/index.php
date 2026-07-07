@@ -40,7 +40,7 @@ require_once __DIR__ . '/../includes/header.php';
 <div class="page-container">
 
     <div class="card">
-        <div class="card-header">
+        <div class="card-header pt-0 pb-0">
             <h2>JEE College Predictor</h2>
             <p>Search colleges based on opening and closing rank.</p>
         </div>

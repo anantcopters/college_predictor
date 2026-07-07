@@ -12,11 +12,17 @@ require_once __DIR__ . '/config.php';
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
+    <!-- Bootstrap Css -->
+    <link href="<?= BASE_URL ?>/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="<?= BASE_URL ?>/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="<?= BASE_URL ?>/assets/css/app.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 
-    <h1><?php echo APP_NAME; ?></h1>
+    <h1 style="color: white;" class="mb-0"><?php echo APP_NAME; ?></h1>
 
     <nav>
         <a href="<?= BASE_URL ?>/index.php">JoSAA Counselling</a> |

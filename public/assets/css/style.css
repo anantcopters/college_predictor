@@ -19,9 +19,10 @@ body {
 ========================================================= */
 
 .page-container {
-    max-width: 1180px;
+    max-width: 1400px;
     margin: 28px auto;
     padding: 0 18px;
+    margin-top: 15px;
 }
 
 .card {
@@ -41,6 +42,10 @@ body {
     margin: 0 0 18px;
     color: #666;
     font-size: 15px;
+}
+
+.card-header {
+    border-bottom: 0px !important;
 }
 
 
@@ -262,6 +267,7 @@ button:hover {
 
     font-size: 12px;
     font-weight: 600;
+    padding-bottom: 0px;
 }
 
 .toolbar-right {
