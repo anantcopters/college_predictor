@@ -25,8 +25,8 @@ require_once __DIR__ . '/config.php';
     <h1 style="color: white;" class="mb-0"><?php echo APP_NAME; ?></h1>
 
     <nav>
-        <a href="<?= BASE_URL ?>/index.php">JoSAA Counselling</a> |
-        <a href="<?= BASE_URL ?>/iat.php">IAT Counselling</a> |
-        <a href="<?= BASE_URL ?>/upload.php">Upload JoSAA Excel</a> |
-        <a href="<?= BASE_URL ?>/iat_admin.php">IAT Admin</a>
+        <a href="<?= BASE_URL ?>/index.php" class="fs-15">JoSAA Counselling</a> |
+        <a href="<?= BASE_URL ?>/iat.php" class="fs-15">IAT Counselling</a> |
+        <a href="<?= BASE_URL ?>/upload.php" class="fs-15">Upload JoSAA Excel</a> |
+        <a href="<?= BASE_URL ?>/iat_admin.php" class="fs-15">IAT Admin</a>
     </nav>
