@@ -39,7 +39,7 @@ require_once __DIR__ . '/../includes/header.php';
 <div class="page-container">
 
     <div class="card">
-        <div class="card-header">
+        <div class="card-header pt-0 pb-0">
             <h2>IAT College Predictor</h2>
             <p>Search IISER admission chances based on IAT category-wise closing rank.</p>
         </div>
