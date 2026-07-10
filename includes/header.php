@@ -29,6 +29,6 @@ require_once __DIR__ . '/config.php';
         <a href="<?= BASE_URL ?>/iat.php" class="fs-15">IAT Counselling</a> |
         <a href="<?= BASE_URL ?>/upload.php" class="fs-15">Upload JoSAA Excel</a> |
         <a href="<?= BASE_URL ?>/iat_admin.php" class="fs-15">IAT Admin</a> |
-        <a href="<?= BASE_URL ?>/neet_predictor.php" class="fs-15">NEET Counselling</a> |
+        <a href="<?= BASE_URL ?>/neet_predictor.php" class="fs-15">NEET Predictor</a> |
         <a href="<?= BASE_URL ?>/neet_upload.php" class="fs-15">Upload NEET Excel</a>
     </nav>
