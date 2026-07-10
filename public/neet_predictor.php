@@ -67,61 +67,274 @@ require_once __DIR__ . '/../includes/header.php';
             </div>
 
             <div class="bottom-row">
-                <button type="submit">Search NEET Colleges</button>
+                <button type="submit" style="margin-left: 0px;">Search NEET Colleges</button>
             </div>
         </form>
     </div>
 
     <?php if ($searched): ?>
+
         <div class="result-summary">
-            Showing <strong><?= count($results) ?></strong> results for rank range:
-            <strong><?= max(1, (int)$rank - (int)$threshold) ?></strong>
-            to
-            <strong><?= (int)$rank + (int)$threshold ?></strong>
+            <div>
+                Showing <strong id="neetResultCount"><?= count($results) ?></strong>
+                results for rank range:
+                <strong><?= max(1, (int)$rank - (int)$threshold) ?></strong>
+                to
+                <strong><?= (int)$rank + (int)$threshold ?></strong>
+            </div>
+
+            <span class="mode-badge main">
+                NEET UG Counselling
+            </span>
         </div>
 
         <?php if (!$results): ?>
-            <div class="no-result">No NEET UG allotment found.</div>
-        <?php else: ?>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Status</th>
-                            <th>Institute</th>
-                            <th>Course</th>
-                            <th>Quota</th>
-                            <th>Category</th>
-                            <th>Round</th>
-                            <th>Option</th>
-                            <th>Remarks</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($results as $r): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($r['rank']) ?></td>
-                                <td><?= htmlspecialchars(statusLabel($r)) ?></td>
-                                <td>
-                                    <?php if ($r['is_upgraded']): ?>
-                                        <?= htmlspecialchars($r['previous_institute']) ?>
-                                        →
-                                    <?php endif; ?>
-                                    <?= htmlspecialchars($r['final_institute']) ?>
-                                </td>
-                                <td><?= htmlspecialchars($r['final_course']) ?></td>
-                                <td><?= htmlspecialchars($r['final_quota']) ?></td>
-                                <td><?= htmlspecialchars($r['final_category'] ?? '-') ?></td>
-                                <td>R<?= htmlspecialchars($r['round_no']) ?></td>
-                                <td><?= htmlspecialchars($r['option_no'] ?? '-') ?></td>
-                                <td><?= htmlspecialchars($r['remarks']) ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+
+            <div class="no-result">
+                No NEET UG allotment found for the selected criteria.
             </div>
+
+        <?php else: ?>
+
+            <div class="table-wrapper neet-table-wrapper">
+
+                <div class="table-toolbar">
+
+                    <div class="toolbar-left">
+                        <h3>NEET UG Search Results</h3>
+
+                        <span class="result-count">
+                            <span id="neetVisibleCount"><?= count($results) ?></span>
+                            Results Found
+                        </span>
+                    </div>
+
+                    <div class="toolbar-right">
+
+                        <button type="button"
+                            id="neetToggleFilters"
+                            class="filter-btn">
+                            🔎 Show Filters
+                        </button>
+
+                        <button type="button"
+                            id="neetResetFilters"
+                            class="filter-btn reset-btn">
+                            Reset Filters
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div id="neetFilterPanel"
+                    class="filter-panel"
+                    style="display:none;">
+
+                    <div class="filter-row">
+
+                        <div class="filter-item">
+                            <label>Status</label>
+
+                            <select id="neetFilterStatus">
+                                <option value="">All Statuses</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-item institute">
+                            <label>Institute</label>
+
+                            <select id="neetFilterInstitute">
+                                <option value="">All Institutes</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-item">
+                            <label>Course</label>
+
+                            <select id="neetFilterCourse">
+                                <option value="">All Courses</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-item">
+                            <label>Quota</label>
+
+                            <select id="neetFilterQuota">
+                                <option value="">All Quotas</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-item">
+                            <label>Category</label>
+
+                            <select id="neetFilterCategory">
+                                <option value="">All Categories</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-item">
+                            <label>Round</label>
+
+                            <select id="neetFilterRound">
+                                <option value="">All Rounds</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="neet-table-scroll">
+
+                    <table id="neetResultTable">
+
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Status</th>
+                                <th>Institute</th>
+                                <th>Course</th>
+                                <th>Quota</th>
+                                <th>Category</th>
+                                <th>Round</th>
+                                <th>Option</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <?php foreach ($results as $r): ?>
+
+                                <?php
+                                $categoryDisplay = trim(
+                                    ($r['allotted_category'] ?? '') .
+                                        (
+                                            !empty($r['candidate_category'])
+                                            ? ' / ' . $r['candidate_category']
+                                            : ''
+                                        )
+                                );
+
+                                if ($categoryDisplay === '') {
+                                    $categoryDisplay = $r['final_category'] ?? '-';
+                                }
+
+                                $statusText = statusLabel($r);
+                                ?>
+
+                                <tr>
+
+                                    <td>
+                                        <?= htmlspecialchars((string)$r['rank']) ?>
+                                    </td>
+
+                                    <td>
+                                        <span class="neet-status-badge
+                                    <?= !empty($r['is_upgraded'])
+                                        ? 'upgraded'
+                                        : (!empty($r['is_fresh_allotted'])
+                                            ? 'fresh'
+                                            : 'retained') ?>">
+
+                                            <?= htmlspecialchars($statusText) ?>
+
+                                        </span>
+                                    </td>
+
+                                    <td class="neet-institute-cell">
+
+                                        <?php if (!empty($r['is_upgraded'])): ?>
+
+                                            <div class="neet-seat-change">
+
+                                                <div class="previous-seat">
+                                                    <span class="seat-label">
+                                                        Previous
+                                                    </span>
+
+                                                    <?= htmlspecialchars(
+                                                        $r['previous_institute'] ?? '-'
+                                                    ) ?>
+                                                </div>
+
+                                                <div class="seat-arrow">
+                                                    ↓
+                                                </div>
+
+                                                <div class="current-seat">
+                                                    <span class="seat-label">
+                                                        Upgraded To
+                                                    </span>
+
+                                                    <?= htmlspecialchars(
+                                                        $r['final_institute'] ?? '-'
+                                                    ) ?>
+                                                </div>
+
+                                            </div>
+
+                                        <?php else: ?>
+
+                                            <?= htmlspecialchars(
+                                                $r['final_institute'] ?? '-'
+                                            ) ?>
+
+                                        <?php endif; ?>
+
+                                    </td>
+
+                                    <td>
+                                        <?= htmlspecialchars(
+                                            $r['final_course'] ?? '-'
+                                        ) ?>
+                                    </td>
+
+                                    <td>
+                                        <?= htmlspecialchars(
+                                            $r['final_quota'] ?? '-'
+                                        ) ?>
+                                    </td>
+
+                                    <td>
+                                        <?= htmlspecialchars($categoryDisplay) ?>
+                                    </td>
+
+                                    <td>
+                                        R<?= htmlspecialchars(
+                                                (string)$r['round_no']
+                                            ) ?>
+                                    </td>
+
+                                    <td>
+                                        <?= htmlspecialchars(
+                                            !empty($r['option_no'])
+                                                ? (string)$r['option_no']
+                                                : '-'
+                                        ) ?>
+                                    </td>
+
+                                    <td class="neet-remarks-cell">
+                                        <?= htmlspecialchars(
+                                            $r['remarks'] ?? '-'
+                                        ) ?>
+                                    </td>
+
+                                </tr>
+
+                            <?php endforeach; ?>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
         <?php endif; ?>
+
     <?php endif; ?>
 </div>
 
@@ -141,5 +354,12 @@ function statusLabel(array $r): string
     };
 }
 ?>
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+
+<script src="<?= BASE_URL ?>/assets/js/neet-result-table.js"></script>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
